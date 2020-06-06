@@ -4,9 +4,16 @@ import {graphql} from "gatsby";
 import Layout from "../components/layout";
 import Image from "../components/image";
 import SEO from "../components/seo";
+import {css} from "@emotion/core";
+
+const brownStyles = css({color: "brown"});
 
 const IndexPage: React.FC = ({data}: React.PropsWithChildren<any>) => {
-  console.log(data);
+  console.log(brownStyles);
+  console.log(data.allMdx);
+  const title =
+    data.allMdx.edges[0].node.frontmatter.path ?? "no title available";
+  console.log(title);
   return (
     <Layout>
       <SEO title="Home" />
@@ -16,8 +23,7 @@ const IndexPage: React.FC = ({data}: React.PropsWithChildren<any>) => {
       <div style={{maxWidth: `300px`, marginBottom: `1.45rem`}}>
         <Image />
       </div>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+      <Link to={title}>{title}</Link>
     </Layout>
   );
 };
@@ -31,7 +37,6 @@ export const query = graphql`
         node {
           id
           frontmatter {
-            date
             path
             title
           }
