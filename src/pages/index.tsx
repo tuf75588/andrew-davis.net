@@ -9,11 +9,8 @@ import {css} from "@emotion/core";
 const brownStyles = css({color: "brown"});
 
 const IndexPage: React.FC = ({data}: React.PropsWithChildren<any>) => {
-  console.log(brownStyles);
-  console.log(data.allMdx);
   const title =
     data.allMdx.edges[0].node.frontmatter.path ?? "no title available";
-  console.log(title);
   return (
     <Layout>
       <SEO title="Home" />
