@@ -13,14 +13,7 @@ const IndexPage: React.FC = ({data}: React.PropsWithChildren<any>) => {
     data.allMdx.edges[0].node.frontmatter.path ?? "no title available";
   return (
     <Layout>
-      <SEO title="Home" />
-      <h1>Hi people</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
-      <div style={{maxWidth: `300px`, marginBottom: `1.45rem`}}>
-        <Image />
-      </div>
-      <Link to={title}>{title}</Link>
+      <p>welcome everyone to this new dank website</p>
     </Layout>
   );
 };

@@ -9,7 +9,7 @@ exports.onCreateNode = async ({node, actions, getNode}) => {
     createNodeField({
       name: "slug",
       node,
-      value: `/blog${value}`,
+      value: `/${value}`,
     });
   }
 };
@@ -38,7 +38,7 @@ exports.createPages = async ({graphql, actions, reporter}) => {
     console.log(node.fields);
     createPage({
       path: node.fields.slug,
-      component: path.resolve(`./src/components/page-layout.tsx`),
+      component: path.resolve(`./src/templates/post.tsx`),
       context: {id: node.id},
     });
   });
