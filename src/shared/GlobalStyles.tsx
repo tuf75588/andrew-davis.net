@@ -1,7 +1,7 @@
 import React, {ReactElement} from "react";
 import {Global, css} from "@emotion/core";
 
-function GlobalStyles(): ReactElement {
+function GlobalStyles(): JSX.Element {
   return (
     <Global
       styles={css`

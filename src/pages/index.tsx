@@ -1,22 +1,29 @@
 import React from "react";
-import {Link} from "gatsby";
 import {graphql} from "gatsby";
 import Layout from "../components/layout";
-import Image from "../components/image";
-import SEO from "../components/seo";
-import {css} from "@emotion/core";
+import styled from "@emotion/styled";
 
-const brownStyles = css({color: "brown"});
+const StyledContainer = styled.div`
+  height: 350px;
+  @media (min-width: 520px) {
+    height: 400px;
+  }
+  @media (min-width: 1400px) {
+    height: 500px;
+  }
+`;
 
-const IndexPage: React.FC = ({data}: React.PropsWithChildren<any>) => {
+function IndexPage({data}): JSX.Element {
   const title =
     data.allMdx.edges[0].node.frontmatter.path ?? "no title available";
   return (
     <Layout>
-      <p>welcome everyone to this new dank website</p>
+      <StyledContainer>
+        <h1>nice to meet you!</h1>
+      </StyledContainer>
     </Layout>
   );
-};
+}
 
 export default IndexPage;
 
