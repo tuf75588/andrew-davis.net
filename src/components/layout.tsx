@@ -6,7 +6,7 @@ import GlobalStyles from "../shared/GlobalStyles";
 import {Helmet} from "react-helmet";
 import {Main, StyledTitle, TitleLink, StyledHeader} from "../shared/pattern";
 
-function Layout({children}) {
+function Layout({children}): JSX.Element {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -19,6 +19,7 @@ function Layout({children}) {
   return (
     <Main>
       <GlobalStyles />
+
       <Helmet>
         <link
           href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Rubik:700"
