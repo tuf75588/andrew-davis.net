@@ -1,19 +1,20 @@
 import React from "react";
-import {graphql} from "gatsby";
+import {graphql, PageProps} from "gatsby";
 import {MDXRenderer} from "gatsby-plugin-mdx";
 import {MDXProvider} from "@mdx-js/react";
-import styled from "@emotion/styled";
 
-const StyledPostDate = styled.time`
-  color: #999;
-  font-weight: 400;
-  display: block;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  text-align: right;
-`;
+interface PostTemplateProps extends PageProps {
+  data: {
+    mdx: {
+      frontmatter: {
+        title: string;
+      };
+      body: string;
+    };
+  };
+}
 
-function PostTemplate({data}) {
+function PostTemplate<PostTemplateProps>({data}: any) {
   return (
     <div>
       <h1>{data.mdx.frontmatter.title}</h1>

@@ -1,17 +1,7 @@
 import React from "react";
 import {graphql} from "gatsby";
 import Layout from "../components/layout";
-import styled from "@emotion/styled";
-
-const StyledContainer = styled.div`
-  height: 350px;
-  @media (min-width: 520px) {
-    height: 400px;
-  }
-  @media (min-width: 1400px) {
-    height: 500px;
-  }
-`;
+import {StyledContainer} from "../shared/pattern";
 
 function IndexPage({data}): JSX.Element {
   const title =
