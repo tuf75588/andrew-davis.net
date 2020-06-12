@@ -4,8 +4,8 @@ import Layout from "../components/layout";
 import {StyledContainer} from "../shared/pattern";
 
 function IndexPage({data}): JSX.Element {
-  const title =
-    data.allMdx.edges[0].node.frontmatter.path ?? "no title available";
+  // const title =
+  //   data.allMdx.edges[0].node.frontmatter.path ?? "no title available";
   return (
     <Layout>
       <StyledContainer>
@@ -17,18 +17,18 @@ function IndexPage({data}): JSX.Element {
 
 export default IndexPage;
 
-export const query = graphql`
-  {
-    allMdx {
-      edges {
-        node {
-          id
-          frontmatter {
-            path
-            title
-          }
-        }
-      }
-    }
-  }
-`;
+// export const query = graphql`
+//   {
+//     allMdx {
+//       edges {
+//         node {
+//           id
+//           frontmatter {
+//             path
+//             title
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;

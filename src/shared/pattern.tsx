@@ -1,5 +1,4 @@
 // custom components that will be used in different places throughout the site
-
 import React from "react";
 import styled from "@emotion/styled";
 import {Link} from "gatsby";
