@@ -12,7 +12,7 @@ exports.onCreateNode = async ({node, actions, getNode}) => {
     console.log(value);
     // value is /about and /blog-1
     createNodeField({
-      name: "newField",
+      name: "slug",
       node,
       value: `/new${value}`,
     });
@@ -27,32 +27,32 @@ exports.onCreateNode = async ({node, actions, getNode}) => {
   }
 };
 
-// exports.createPages = async ({graphql, actions, reporter}) => {
-//   const {createPage} = actions;
-//   const result = await graphql(`
-//     query {
-//       allMdx {
-//         edges {
-//           node {
-//             id
-//             fields {
-//               slug
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `);
-//   if (result.errors) {
-//     reporter.panicOnBuild("🚨  ERROR: Loading 'createPages' query");
-//   }
-//   const posts = result.data.allMdx.edges;
-//   posts.forEach(({node}, index) => {
-//     console.log(node.fields);
-//     createPage({
-//       path: node.fields.slug,
-//       component: path.resolve(`./src/templates/post.tsx`),
-//       context: {id: node.id},
-//     });
-//   });
-// };
+exports.createPages = async ({graphql, actions, reporter}) => {
+  const {createPage} = actions;
+  const result = await graphql(`
+    query {
+      allMdx {
+        edges {
+          node {
+            id
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `);
+  if (result.errors) {
+    reporter.panicOnBuild("🚨  ERROR: Loading 'createPages' query");
+  }
+  const posts = result.data.allMdx.edges;
+  posts.forEach(({node}, index) => {
+    console.log(node.fields);
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve(`./src/templates/post.tsx`),
+      context: {id: node.id},
+    });
+  });
+};
