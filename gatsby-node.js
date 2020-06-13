@@ -32,3 +32,7 @@ exports.onCreateNode = async ({node, getNode, actions}) => {
     }
   }
 };
+
+exports.onCreatePages = async ({}) => {
+  console.log("creating a page!");
+};
