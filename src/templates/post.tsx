@@ -1,7 +1,7 @@
 import React from 'react';
-
-function Post(props: any) {
-  return <div>this is a post template page!</div>;
+import Layout from '../components/layout';
+function PostTemplate(props: any) {
+  return <Layout>this is a post template page!</Layout>;
 }
 
-export default Post;
+export default PostTemplate;

@@ -35,6 +35,17 @@ exports.onCreateNode = async ({node, getNode, actions}) => {
         {type: 'post'}
         */
       });
+    } else {
+      createNodeField({
+        name: 'slug',
+        node,
+        value: `${value}`,
+      });
+      createNodeField({
+        name: 'type',
+        node,
+        value: 'page',
+      });
     }
   }
 };
@@ -62,5 +73,13 @@ exports.createPages = async ({actions, graphql}) => {
   const posts = result.data.allMdx.edges;
   posts.forEach(({node}, index) => {
     console.log(node);
+    createPage({
+      path: node.fields.slug,
+      component: templatePath,
+      context: {
+        slug: node.fields.slug,
+      },
+    });
   });
+  return posts;
 };
