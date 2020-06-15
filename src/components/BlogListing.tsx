@@ -1,7 +1,6 @@
 import React from 'react';
-import {css} from '@emotion/core';
 import styled from '@emotion/styled';
-import {Link, graphql} from 'gatsby';
+import {useStaticQuery, graphql, Link} from 'gatsby';
 
 type BlogPostType = {
   blogPosts: {
@@ -23,7 +22,7 @@ const DateSpan = styled.span`
 `;
 
 const StyledBlogListing = styled.ul`
-  display: none;
+  list-style: none;
 `;
 
 const StyledBlogItem = styled.li`
@@ -36,33 +35,39 @@ this component will just be a list of blog posts
 blog item will be a seperate component
 */
 
-function BlogListing({data}: any) {
-  console.log(data);
-  return (
-    <div
-      css={css`
-        background: black;
-        width: 500px;
-        color: white;
-      `}
-    >
-      a listing of blog posts
-    </div>
-  );
-}
-
-export default BlogListing;
-// we will eventually need a graphql query here
-graphql`
-  {
-    allMdx(filter: {fields: {type: {eq: "post"}}}) {
-      edges {
-        node {
-          frontmatter {
-            title
+function BlogListing() {
+  const data = useStaticQuery(graphql`
+    query blogQuery {
+      allMdx(filter: {fields: {type: {eq: "post"}}}) {
+        edges {
+          node {
+            id
+            frontmatter {
+              title
+              date(formatString: "LL")
+            }
+            fields {
+              slug
+            }
           }
         }
       }
     }
-  }
-`;
+  `);
+
+  const blogPosts = data.allMdx.edges ? data.allMdx.edges : [];
+  const posts = blogPosts.map((post: any) => {
+    return (
+      <StyledBlogItem key={post.node.id}>
+        <Link to={`${post.node.fields.slug}`}>
+          {post.node.frontmatter.title}
+        </Link>
+        <DateSpan>({post.node.frontmatter.date})</DateSpan>
+      </StyledBlogItem>
+    );
+  });
+  return <StyledBlogListing>{posts}</StyledBlogListing>;
+}
+
+export default BlogListing;
+// we will eventually need a graphql query here
