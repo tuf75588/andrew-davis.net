@@ -1,7 +1,7 @@
 import React from 'react';
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
-import {Link} from 'gatsby';
+import {Link, graphql} from 'gatsby';
 
 type BlogPostType = {
   blogPosts: {
@@ -31,7 +31,13 @@ const StyledBlogItem = styled.li`
   margin-bottom: 0.5em;
 `;
 
-function BlogListing<T>({blogPosts}: BlogPostType) {
+/*
+this component will just be a list of blog posts
+blog item will be a seperate component
+*/
+
+function BlogListing({data}: any) {
+  console.log(data);
   return (
     <div
       css={css`
@@ -47,3 +53,16 @@ function BlogListing<T>({blogPosts}: BlogPostType) {
 
 export default BlogListing;
 // we will eventually need a graphql query here
+graphql`
+  {
+    allMdx(filter: {fields: {type: {eq: "post"}}}) {
+      edges {
+        node {
+          frontmatter {
+            title
+          }
+        }
+      }
+    }
+  }
+`;

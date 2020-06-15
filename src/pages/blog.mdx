@@ -1,3 +1,5 @@
+import {graphql} from 'gatsby';
+
 import BlogListing from '../components/BlogListing';
 
 # Hello blog!
@@ -5,3 +7,17 @@ import BlogListing from '../components/BlogListing';
 <BlogListing />
 
 <!-- we will import some components here soon -->
+
+export const query = graphql`
+  {
+    allMdx(filter: {fields: {type: {eq: "post"}}}) {
+      edges {
+        node {
+          frontmatter {
+            title
+          }
+        }
+      }
+    }
+  }
+`;
