@@ -22,7 +22,7 @@ exports.onCreateNode = async ({node, getNode, actions}) => {
       createNodeField({
         name: 'slug',
         node,
-        value: `/${sourceInstanceName}${value}`,
+        value: `blog/${sourceInstanceName}${value}`,
       });
       createNodeField({
         name: 'type',
@@ -53,7 +53,6 @@ exports.onCreateNode = async ({node, getNode, actions}) => {
 exports.createPages = async ({actions, graphql}) => {
   console.log('creating a page!');
   const {createPage} = actions;
-  const templatePath = path.resolve('./src/templates/post.tsx');
   const result = await graphql(`
     query {
       allMdx {
@@ -73,9 +72,13 @@ exports.createPages = async ({actions, graphql}) => {
   const posts = result.data.allMdx.edges;
   posts.forEach(({node}, index) => {
     console.log(node);
+    const templatePath =
+      node.fields.type === 'post' && node.fields.type !== 'page'
+        ? `./src/templates/post.tsx`
+        : './src/templates/project.tsx';
     createPage({
       path: node.fields.slug,
-      component: templatePath,
+      component: path.resolve(templatePath),
       context: {
         slug: node.fields.slug,
       },

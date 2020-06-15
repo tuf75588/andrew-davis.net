@@ -1,7 +1,7 @@
 import React from 'react';
-
+import Layout from '../components/layout';
 function ProjectTemplate({data}: any) {
-  return <div>this is the prodcut page template!</div>;
+  return <Layout>this is the prodcut page template!</Layout>;
 }
 
 export default ProjectTemplate;

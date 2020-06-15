@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {useStaticQuery, graphql} from "gatsby";
-import Navbar from "./Navbar";
-import GlobalStyles from "../shared/GlobalStyles";
-import {Helmet} from "react-helmet";
-import {Main, StyledTitle, TitleLink, StyledHeader} from "../shared/pattern";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {useStaticQuery, graphql} from 'gatsby';
+import Navbar from './Navbar';
+import GlobalStyles from '../shared/GlobalStyles';
+import {Helmet} from 'react-helmet';
+import {Main, StyledTitle, TitleLink, StyledHeader} from '../shared/pattern';
 
-function Layout({children}): JSX.Element {
+function Layout({children}: any): JSX.Element {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
