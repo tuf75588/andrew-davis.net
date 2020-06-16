@@ -12,13 +12,6 @@ function IndexPage({data}: any): JSX.Element {
       <Debug data={data} />
       <StyledContainer>
         <h1>nice to meet you!</h1>
-        {data.allMdx.nodes.map((item: any) => {
-          return (
-            <Link key={item.frontmatter.title} to={item.fields.slug}>
-              <h1>{item.frontmatter.title}</h1>
-            </Link>
-          );
-        })}
       </StyledContainer>
     </Layout>
   );

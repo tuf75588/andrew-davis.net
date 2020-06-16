@@ -71,14 +71,23 @@ exports.createPages = async ({actions, graphql}) => {
 
   const posts = result.data.allMdx.edges;
   posts.forEach(({node}, index) => {
-    console.log(node);
-    createPage({
-      path: node.fields.slug,
-      component: path.resolve(`./src/templates/post.tsx`),
-      context: {
-        slug: node.fields.slug,
-      },
-    });
+    const regularPage = node.fields.type === 'page';
+    console.log(regularPage);
+    if (regularPage) {
+      return;
+    } else {
+      const templatePath =
+        node.fields.type === 'post'
+          ? `./src/templates/post.tsx`
+          : `./src/templates/project.tsx`;
+      createPage({
+        path: node.fields.slug,
+        component: path.resolve(templatePath),
+        context: {
+          slug: node.fields.slug,
+        },
+      });
+    }
   });
   return posts;
 };
