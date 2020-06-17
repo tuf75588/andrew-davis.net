@@ -7,6 +7,16 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-remark-prismjs',
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
@@ -16,7 +26,7 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: "pages",
+        name: 'pages',
         path: `${__dirname}/src/pages`,
       },
     },
@@ -37,25 +47,35 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: "posts",
+        name: 'posts',
         path: `${__dirname}/src/content/posts/`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: "projects",
+        name: 'projects',
         path: `${__dirname}/src/content/projects/`,
       },
     },
     {
       resolve: `gatsby-plugin-mdx`,
       options: {
-        extensions: [".md", ".mdx"],
+        extensions: ['.md', '.mdx'],
 
         defaultLayouts: {
           default: require.resolve(`./src/components/layout.tsx`),
         },
+        gatsbyRemarkPlugins: [
+          {resolve: 'gatsby-remark-prismjs', options: {}},
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              backgroundColor: '#fafafa',
+              maxWidth: 1035,
+            },
+          },
+        ],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
@@ -67,7 +87,7 @@ module.exports = {
         sourceMap: true,
         autoLabel: true,
         cssPropOptimizations: true,
-        labelFormat: "[local]",
+        labelFormat: '[local]',
       },
     },
   ],

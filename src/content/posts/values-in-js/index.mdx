@@ -1,0 +1,111 @@
+---
+title: 'Types in JavaScript'
+date: '2020-03-08'
+excerpt: 'My first blog post'
+publish: true
+---
+
+<div class="small">
+  <JSLogo />
+</div>
+
+# What types does JS recognize?
+
+<section class="blog-section mt-logo">
+  Types in JavaScript was a topic that had (and sometimes still does!) always confused
+  me, so I figured what better way to reinforce my understanding than to right a
+  blog post about it!
+
+Before we begin we must first understand that JavaScript distinguishes **two** types of data, primative values and objects.
+
+The ECMAScript Specification formally recognizes seven types, they are the following:
+
+</section>
+
+1. null
+2. undefined
+3. string
+4. boolean
+5. symbol
+6. object
+7. number
+
+Now that we know what kind of types JavaScript recognizes, lets
+analyze the first subset of these types **primitive values**.
+
+---
+
+### 1. Primatives are immutable
+
+There are 6 primitive values in the JavaScript specification, they consist of the following:
+
+1. undefined
+1. null
+1. string
+1. number
+1. symbol
+1. boolean
+
+You cannot add, change, or remove properties of primitives.
+
+```js
+let name = 'Andrew';
+name[2] = 'P'; // not allowed!
+```
+
+### 2. Primatives are passed by value
+
+Primatives are passed by value: variables (including function parameters) store the contents (via copying) of the primitive when assigning that value to a variable or passing it as an argument to a function.
+
+```js
+let x = 123;
+ley y = x // x is copied by its value 123
+```
+
+### 3. Primtives are compared by value
+
+When comparing two primitive values, we compare their contents.
+
+```js
+123 === 123; // true
+'abc' === 'abc'; // true
+// works for variables too!
+let name = 'Andrew';
+let friendsName = 'Andrew';
+name === friendsName; // true
+```
+
+The code snippets above demonstrate how atomic and siginifigant primitive values are when using them to construct data in the context of JavaScript, due to their immutability and comparison mechanics, they more often feel less confusing and amiguous to work with throughout your code.
+
+---
+
+# Objects
+
+Now that we have a decent understanding of primitive values, we will now look at the second type of value that JavaScript recognizes, **objects**. In contrast to primitive values, objects are a value in memory which is referenced by an identifier. This identifier could a variable, function, or property. Unlike primitives, objects are seen as a collection of properties that can be added, modified, or removed. In addition to their mutability, property values can be of many different types, including other objects, which allows for building complex and versitile data structures.
+
+An example of comparing identifiers instead of values would look something like:
+
+```js
+{} === {} // false!
+```
+
+While the above snippet may seem confusing at first glance, it makes more sense when you realize that each object literal(identifiers) points to a different place in memory, and are therefore not equal to one another.
+
+If we wanted to create a scenario where two objects would equate to true when compared, we would need to point the memory location of one object to another identifier.
+
+```js
+const a = {name: 'foo'};
+const b = a;
+a === b; // true! same value in memory
+```
+
+It is important to keep in mind that since the above snippet creates a scenario where two variables are pointing to the same place in memory, if one identifier is modified in any way, its reference will too. This can very easily cause unwanted side effects throughout your code, the most common solution to this is to perform a shallow or deep copy of an object, but that is a topic for a different blog post altogether.
+
+```js
+const a {name:'bar'};
+const b = a;
+b.name = 'baz';
+console.log(a) // {name: 'baz'}
+```
+
+I hope this post has provided some help in understanding some of the more subtle differences in types throughout JavaScript, there is more to unpack than what this post goes into, but my aim was to provide some foundaitonal knowledge on the topic to help understand things from a high level. I would love to hear from anyone regarding questions or concerns about this post, feel free to reach out to me anytime via e-mail [develop.it4@gmail.com](mailto:develop.it4@gmail.com)

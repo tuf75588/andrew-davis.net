@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useStaticQuery, graphql} from 'gatsby';
+import 'prismjs/themes/prism.css';
 import Navbar from './Navbar';
 import GlobalStyles from '../shared/GlobalStyles';
 import {MDXProvider} from '@mdx-js/react';
 import {Helmet} from 'react-helmet';
 import {Main, StyledTitle, TitleLink, StyledHeader} from '../shared/pattern';
 import XA from './ExternalAnchor';
-
-const ExternalAnchor = {XA};
+import JSLogo from '../components/mdxComponents/JSLogo';
+const ExternalMDXComponents = {XA, JSLogo};
 
 function Layout({children}: any): JSX.Element {
   const data = useStaticQuery(graphql`
@@ -21,7 +22,7 @@ function Layout({children}: any): JSX.Element {
     }
   `);
   return (
-    <MDXProvider components={ExternalAnchor}>
+    <MDXProvider components={ExternalMDXComponents}>
       <Main>
         <GlobalStyles />
 

@@ -1,0 +1,144 @@
+---
+title: 'Equality operators in JavaScript'
+date: '2020-03-22'
+excerpt: 'Equality rules in JavaScript'
+publish: true
+---
+
+## What's the deal with "===" and "==" in JavaScript?
+
+<div class="blog-section">
+Chances are, if you're an experienced JavaScript developer, or still learning
+the language, at some point, you've had to compare some value against another.
+
+If your experience is similar to mine, you were advised to exclusively use the === operator when comparing values to one another. While I still find this rule to be true and the best approach in scenarios where some comparison is happening, I thought it would be a good idea to write a blog post as to why this is the case, and offer some insight on why it's younger sibling == tends to be more dangerous and quirky to use throughout your code.
+
+</div>
+
+<section class="blog-section">
+  Before we explore the <code>==</code> operator, we must first take a step back
+  and look at how JavaScript operators work when they receive operands they
+  can't quite work with right away. As a quick example, lets look at how the{' '}
+  <code>*</code> operator behaves when instead of receiving numbers, it receives
+  two strings.
+
+```javascript
+const stringsInsteadOfNumbers = '7' * '3';
+console.log(stringsInsteadOfNumbers); // 21
+```
+
+![](https://media3.giphy.com/media/ToMjGpnXBTw7vnokxhu/giphy.gif)
+
+This might not be the outcome you expected, but it makes sence once you understand how JavaScript behaves when it encounters operands it can't work with. In the case of the multiplication operator, it can only work with numbers, so when it encounters a string in the example snippet above, it will attempt to coerce (automatically convert) each operand to numbers first and then attempt to produce a result. What ends up happening is something similar to this:
+
+```js
+const stringsInsteadOfNumbers = Number('7') * Number('3');
+console.log(stringsInsteadOfNumbers); // 21;
+```
+
+A good rule of thumb to remember about JavaScript operators is **most operators will only work with primitive values**. Keeping this in mind will help making some of the quirks about them a little easier to reason about.
+
+</section>
+
+<section class="blog-section">
+  Now, that we've done a gental introduction to JavaScript operators, lets look
+  at the == (loose equality) eqaulity operator. It's most distinct behavior when
+  used for comparison is its attempt to <strong>coerce</strong> operands very often. While
+  some of these coercisons make sense:
+
+```js
+'123' == 123; // true!
+// the string '1,2,3' will be coerced to a Number equaling the right hand side of the operator.
+```
+
+Others, not so much...
+
+```js
+'' == 0; // true
+```
+
+When using <code>==</code> (loose equality) perhaps the most important thing to keep in mind is objects will only
+be coerced to primitives if (and only if!) the other operand is a primitive value. Here are two examples of objects being
+coerced to primitive values for the sake of comparison.
+
+```js
+[3, 4, 5] == '3,4,5'; // true!
+
+// The array (an object) will be coerced to a string and result in a true comparison
+
+['3', '4', '5'] == '3,4,5'; // true
+
+// like in the first example, the object ['3','4', '5'] will be coerced to a string which compares truthfully to '3,4,5'
+```
+
+You might be asking yourself, well what happens if both operands are objects? I'm so glad you asked!
+
+If two objects are being compared via == they will only be equal if **they are the same object**, as in pointing to the same identity stored in memory. Let's look at some code.
+
+```js
+[1, 2, 3] == [1, 2, 3]; // false
+
+// two different object, two different spots in memory!
+--------------------------------------------------------
+const arr = ['Please', 'be', 'true!', '☹'];
+arr == arr // true
+
+// we are comparing the same object to itself, therefore this evaluates to true
+```
+
+Before moving on to === I want to make clear the examples used to illustrate some of the quirks of the == operator are by no means meant to discourage anyone from using it in their code, it is more to simply have a better understanding of things to look out for when using it for comparison purposes. Some of the results it produces can lead to confusing bugs or less predictable behaviors, which we all aim to avoid as much as possible.
+
+</section>
+
+---
+
+<section class="blog-section">
+<h2>Strict Equality or Triple Equals</h2>
+
+Now that we have a good understanding of the == equality operator, lets take a look at its much more strict and responsible older sibling, the === operator. In contrast to the == (loose equality) operator the === (strict equality) will never coerce operands. Not making any assumptions about the operands you supply, the === operator will only result in values being equal when they have the same type. To better see the difference between == and === lets look at some previous examples we used above for == and see if there's any difference when we instead use strict equality.
+
+```js
+'123' === 123; // false
+
+/*
+number and string are not the same type, therefore this is a no go.
+this expression however evaulated to true when using == due to coercion.
+ */
+
+false === 0; // false
+
+/*
+boolean and number are two different type,
+this will never be true using strict equality.
+Try comparing these using loose eqaulity and see what happens 😊
+*/
+
+---------------------------------------------------------------------
+
+const aString = 'Hello!';
+
+aString === 'Hello!' // true
+
+// We are comparing a string to another string, and it's values are the same.
+```
+
+Knowing that strict eqaulity will never coerce operands, how it handles comparing objects will probably seem very obvious. Unlike loose equality, where an object would coerced if the other operand is a primitive, an object is only equal to another value if that value is the same object.
+
+```js
+const arr = [1, 3, 5];
+arr === arr; //true
+
+// This object is being compared to itself, therefore true.
+```
+
+</section>
+
+<section class="blog-section">
+  With all of this in mind, it is still very much my recommendation to always
+  use ===, in my opinion it makes your code easier to read and reason about. It
+  also spares you from having to think about a lot of the quirks that come with
+  ==. I do hope this post was helpful in understanding the behavior of both, and
+  more importantly, why you might choose one over the other. Of course, if you
+  have any questions or concerns, please feel free to get in touch with me at
+  any time at <a href="mailto:develop.it4@gmail.com">develop.it4@gmail.com</a>
+</section>
