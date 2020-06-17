@@ -4,6 +4,7 @@ import Layout from '../components/layout';
 import {graphql} from 'gatsby';
 import {Helmet} from 'react-helmet';
 import ProjectLinks from '../components/ProjectLinks';
+import TextPostBody from '../components/TextPostBody';
 
 function ProjectTemplate({data}: any) {
   const {body, frontmatter} = data.mdx;
@@ -23,7 +24,9 @@ function ProjectTemplate({data}: any) {
         lang={frontmatter.lang}
         link={frontmatter.link}
       />
-      <MDXRenderer>{body}</MDXRenderer>
+      <TextPostBody>
+        <MDXRenderer>{body}</MDXRenderer>
+      </TextPostBody>
     </Layout>
   );
 }
