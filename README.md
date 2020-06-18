@@ -1,3 +1,6 @@
 # Redo of my personal portfolio website
 
-- I will make this repo public when it comes further along
+This website is built with the amazing Gatsby.js
+
+Thank you to the wonderful Gatsby.js community and its fabulous documentation and plugin ecosystem
+that made constructing this website a great learning experience
