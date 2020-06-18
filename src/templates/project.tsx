@@ -8,8 +8,6 @@ import TextPostBody from '../components/TextPostBody';
 
 function ProjectTemplate({data}: any) {
   const {body, frontmatter} = data.mdx;
-  console.log(data);
-
   return (
     <Layout>
       {frontmatter.title && (

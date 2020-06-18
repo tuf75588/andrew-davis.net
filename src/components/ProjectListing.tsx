@@ -28,6 +28,7 @@ function ProjectListing() {
           fields: {type: {eq: "project"}}
           frontmatter: {publish: {eq: true}}
         }
+        sort: {fields: frontmatter___date, order: DESC}
       ) {
         edges {
           node {

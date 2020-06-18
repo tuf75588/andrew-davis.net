@@ -51,7 +51,6 @@ exports.onCreateNode = async ({node, getNode, actions}) => {
 };
 
 exports.createPages = async ({actions, graphql}) => {
-  console.log('creating a page!');
   const {createPage} = actions;
   const result = await graphql(`
     query {
@@ -72,7 +71,7 @@ exports.createPages = async ({actions, graphql}) => {
   const posts = result.data.allMdx.edges;
   posts.forEach(({node}, index) => {
     const regularPage = node.fields.type === 'page';
-    console.log(regularPage);
+
     if (regularPage) {
       return;
     } else {
