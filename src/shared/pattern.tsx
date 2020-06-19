@@ -1,7 +1,6 @@
 // custom components that will be used in different places throughout the site
-import React from "react";
-import styled from "@emotion/styled";
-import {Link} from "gatsby";
+import styled from '@emotion/styled';
+import {Link} from 'gatsby';
 
 export const StyledContainer = styled.div`
   height: 350px;

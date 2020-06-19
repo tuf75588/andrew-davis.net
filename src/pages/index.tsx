@@ -5,7 +5,7 @@ import Layout from '../components/layout';
 import {StyledContainer} from '../shared/pattern';
 import ProfileImage from '../components/ProfileImage';
 
-function IndexPage({data}: any): JSX.Element {
+function IndexPage(): JSX.Element {
   // const title =
   //   data.allMdx.edges[0].node.frontmatter.path ?? "no title available";
   return (
@@ -28,18 +28,3 @@ function IndexPage({data}: any): JSX.Element {
 }
 
 export default IndexPage;
-
-export const query = graphql`
-  {
-    allMdx(filter: {frontmatter: {publish: {eq: true}}}) {
-      nodes {
-        frontmatter {
-          title
-        }
-        fields {
-          slug
-        }
-      }
-    }
-  }
-`;

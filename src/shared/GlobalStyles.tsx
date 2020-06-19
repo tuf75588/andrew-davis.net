@@ -1,5 +1,5 @@
-import React, {ReactElement} from "react";
-import {Global, css} from "@emotion/core";
+import React from 'react';
+import {Global, css} from '@emotion/core';
 
 function GlobalStyles(): JSX.Element {
   return (
@@ -15,7 +15,7 @@ function GlobalStyles(): JSX.Element {
         }
         body {
           font-size: 1.6rem;
-          font-family: "Roboto Mono", monospace;
+          font-family: 'Roboto Mono', monospace;
           word-break: break-word;
           // white-space: pre-line;
         }
@@ -25,7 +25,7 @@ function GlobalStyles(): JSX.Element {
         h4,
         h5,
         h6 {
-          font-family: "Rubik", sans-serif;
+          font-family: 'Rubik', sans-serif;
           margin: 0.5em 0;
         }
         *,
@@ -151,8 +151,8 @@ function GlobalStyles(): JSX.Element {
             }
           }
         }
-        :not(pre) > code[class*="language-"],
-        pre[class*="language-"] {
+        :not(pre) > code[class*='language-'],
+        pre[class*='language-'] {
           font-size: 0.9em;
         }
         .gatsby-highlight-code-line {

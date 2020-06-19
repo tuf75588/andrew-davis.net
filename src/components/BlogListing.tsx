@@ -2,16 +2,6 @@ import React from 'react';
 import styled from '@emotion/styled';
 import {useStaticQuery, graphql, Link} from 'gatsby';
 
-type BlogPostType = {
-  blogPosts: {
-    fields: {
-      slug: string;
-      date: string;
-    };
-    title: string;
-  }[];
-};
-
 const DateSpan = styled.span`
   display: none;
   color: #999;
